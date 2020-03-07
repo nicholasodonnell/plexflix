@@ -1,0 +1,10 @@
+#!/usr/bin/with-contenv bash
+
+# make dirs
+mkdir -p /config
+mkdir -p /dev/fuse
+
+chown -R abc:abc /config
+chmod a+x /usr/bin/plexdrive_setup
+chown -R abc:abc /dev/fuse
+chmod a+x /dev/fuse

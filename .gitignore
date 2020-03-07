@@ -1,0 +1,12 @@
+# system
+.DS_Store
+Thumbs.db
+
+# docker
+.env
+
+# config
+**/config/*
+!**/config/.gitkeep
+libraries/*
+!libraries/.gitkeep

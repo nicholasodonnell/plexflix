@@ -1,0 +1,21 @@
+version: "3.5"
+
+services:
+  fuse-shared-mount:
+    build:
+      context: ./fuse-shared-mount
+    container_name: ${PLEXFLIX_PROJECT_NAME}-fuse-shared-mount
+    image: ${PLEXFLIX_PROJECT_NAME}/fuse-shared-mount:latest
+    networks:
+      - plexflix
+    pid: host
+    privileged: true
+
+  list:
+    container_name: ${PLEXFLIX_PROJECT_NAME}-list
+    command: sh -c "ls -adl /mount/**/*"
+    image: alpine:latest
+    networks:
+      - plexflix
+    volumes:
+      - ${PLEXFLIX_LIBRARIES_MOUNT_PATH}:/mount:shared
