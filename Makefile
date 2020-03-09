@@ -1,5 +1,6 @@
 include .env
 
+SHELL := /bin/bash
 PLEXFLIX_DOCKER_COMPOSE_COMMON_FILE := docker-compose.common.yml
 PLEXFLIX_DOCKER_COMPOSE_HELPERS_FILE := docker-compose.helpers.yml
 PLEXFLIX_DOCKER_COMPOSE_PLEX_FILE := ./plex/docker-compose.plex.yml
