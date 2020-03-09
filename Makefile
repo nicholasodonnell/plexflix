@@ -90,7 +90,7 @@ else
 endif
 
 mount-health: ## check mount health
-	@echo "Plexdrive: $(call get_service_health,plexdrive)";
+	@echo "plexdrive: $(call get_service_health,plexdrive)";
 	@docker-compose ${PLEXFLIX_DOCKER_COMPOSE_ARGS} \
 		run \
 			list
