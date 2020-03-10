@@ -1,6 +1,6 @@
 <img src="logo/logo.png" />
 
-**Plexflix** is a personal media managing and streaming solution for Plex libraries hosted on Google Drive.
+**Plexflix** is a dockerized personal media managing and streaming solution for Plex libraries hosted on Google Drive.
 
 ### Requirements
 
