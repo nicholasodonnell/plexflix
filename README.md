@@ -78,6 +78,12 @@ To list running services:
 make ps
 ```
 
+To see the health of your Plexdrive mount:
+
+```
+make mount-health
+```
+
 ## ENV Options
 
 | Option                                      | Description                                                                                                                                                                                                                               |
