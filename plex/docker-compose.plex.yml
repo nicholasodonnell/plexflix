@@ -1,10 +1,10 @@
 version: "3.5"
 services:
   plex:
-    container_name: ${PLEXFLIX_PROJECT_NAME}-plex
+    container_name: ${PROJECT_NAME}-plex
     environment:
-      - PUID=${PLEXFLIX_USER}
-      - PGID=${PLEXFLIX_GROUP}
+      - PUID=${USER}
+      - PGID=${GROUP}
       - VERSION=docker
     image: linuxserver/plex:latest
     networks:
@@ -21,4 +21,4 @@ services:
     restart: unless-stopped
     volumes:
       - ${PLEX_CONFIG_PATH}:/config:delegated
-      - ${PLEXFLIX_LIBRARIES_MOUNT_PATH}:/libraries:shared
+      - ${LIBRARIES_MOUNT_PATH}:/libraries:shared

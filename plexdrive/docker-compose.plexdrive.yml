@@ -6,19 +6,19 @@ services:
     cap_add:
       - MKNOD
       - SYS_ADMIN
-    container_name: ${PLEXFLIX_PROJECT_NAME}-plexdrive
+    container_name: ${PROJECT_NAME}-plexdrive
     devices:
       - /dev/fuse
     environment:
-      - PUID=${PLEXFLIX_USER}
-      - PGID=${PLEXFLIX_GROUP}
+      - PUID=${USER}
+      - PGID=${GROUP}
       - ROOT_FOLDER_ID=${PLEXDRIVE_ROOT_FOLDER_ID}
     healthcheck:
       test: "[ -f /data/.mountcheck ] && exit 0 || exit 1"
       interval: 10s
       timeout: 10s
       start_period: 10s
-    image: ${PLEXFLIX_PROJECT_NAME}/plexdrive:latest
+    image: ${PROJECT_NAME}/plexdrive:latest
     networks:
       - plexflix
     restart: unless-stopped
@@ -26,4 +26,4 @@ services:
       - apparmor:unconfined
     volumes:
       - ${PLEXDRIVE_CONFIG_PATH}:/config:delegated
-      - ${PLEXFLIX_LIBRARIES_MOUNT_PATH}:/data:shared
+      - ${LIBRARIES_MOUNT_PATH}:/data:shared

@@ -72,6 +72,35 @@ To clean the Plexflix project (will require another `make build`):
 make clean
 ```
 
+To list running services:
+
+```
+make ps
+```
+
+## ENV Options
+
+| Option                                      | Description                                                                                                                                                                                                                               |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PROJECT_NAME`                              | The docker compose project name. Will be used as a prefix for all containers.                                                                                                                                                             |
+| `USER`                                      | `PUID` of user for volume mounts. Ensures any volume directories on the host are owned by the same user to avoid any permissions issues.                                                                                                  |
+| `GROUP`                                     | `PGID` of user for volume mounts. Ensures any volume directories on the host are owned by the same user to avoid any permissions issues.                                                                                                  |
+| `TIMEZONE`                                  | Timezone to use.                                                                                                                                                                                                                          |
+| `LIBRARIES_MOUNT_PATH`                      | Path on the host to mount Google Drive libraries.                                                                                                                                                                                         |
+| `LETSENCRYPT_NGINX_PROXY_COMPANION_NETWORK` | _(Optional)_ Name of the external network for proxying Plex over SSL. See [nicholasodonnell/docker-letsencrypt-nginx-proxy-companion](https://github.com/nicholasodonnell/docker-letsencrypt-nginx-proxy-companion) for more information. |
+| `PLEX_COMPANION_PORT`                       | Host port for the Plex companion.                                                                                                                                                                                                         |
+| `PLEX_DLNA_SERVER_TCP_PORT`                 | Host port for Plex DLNA server (TCP).                                                                                                                                                                                                     |
+| `PLEX_DLNA_SERVER_UDP_PORT`                 | Host port for Plex DLNA server (UDP).                                                                                                                                                                                                     |
+| `PLEX_MEDIA_SERVER_PORT`                    | Host port for Plex Media Server.                                                                                                                                                                                                          |
+| `PLEX_NETWORK_DISCOVERY_PORT_1`             | Host port for Plex network discovery (#1).                                                                                                                                                                                                |
+| `PLEX_NETWORK_DISCOVERY_PORT_2`             | Host port for Plex network discovery (#2).                                                                                                                                                                                                |
+| `PLEX_NETWORK_DISCOVERY_PORT_3`             | Host port for Plex network discovery (#3).                                                                                                                                                                                                |
+| `PLEX_NETWORK_DISCOVERY_PORT_4`             | Host port for Plex network discovery (#4).                                                                                                                                                                                                |
+| `PLEX_ROKU_COMPANION_PORT`                  | Host port for Plex Roku companion.                                                                                                                                                                                                        |
+| `PLEX_HOST`                                 | _(Optional)_ Virtual host to resolve Plex. See [nicholasodonnell/docker-letsencrypt-nginx-proxy-companion](https://github.com/nicholasodonnell/docker-letsencrypt-nginx-proxy-companion) for more information.                            |
+| `PLEXDRIVE_CONFIG_PATH`                     | Host location for Rclone configuration files.                                                                                                                                                                                             |
+| `PLEXDRIVE_ROOT_FOLDER_ID`                  | Google Drive folder ID to be treated as the root folder (use this to mount a sub directory).                                                                                                                                              |
+
 ## FAQ
 
 If you get an error such as `..is mounted on /Users but it is not a shared mount...` run `make fuse-shared-mount dir=/Users` where `dir` is your root directory.
