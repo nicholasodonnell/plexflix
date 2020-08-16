@@ -78,6 +78,8 @@ exec: ## run a command against a running service
 fuse-shared-mount: ## make shared fuse mount
 	@docker-compose ${DOCKER_COMPOSE_ARGS} \
 		run \
+			--name fuse-shared-mount \
+			--rm \
 			-e MOUNT_DIR=$(dir) \
 			fuse-shared-mount
 
