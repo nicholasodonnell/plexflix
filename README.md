@@ -110,3 +110,5 @@ make mount-health
 ## FAQ
 
 If you get an error such as `..is mounted on /Users but it is not a shared mount...` run `make fuse-shared-mount dir=/Users` where `dir` is your root directory.
+
+If you get an error such as `...mount: /host_mnt/dir: not mount point or bad option...` turn off `Use gRPC FUSE for file sharing` in your Docker preferences.
