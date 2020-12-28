@@ -10,12 +10,3 @@ services:
       - plexflix
     pid: host
     privileged: true
-
-  list:
-    container_name: ${PROJECT_NAME}-list
-    command: sh -c "ls -adl /mount/**/*"
-    image: alpine:latest
-    networks:
-      - plexflix
-    volumes:
-      - ${LIBRARIES_MOUNT_PATH}:/mount:shared
