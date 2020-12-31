@@ -10,7 +10,7 @@ define DOCKER_COMPOSE_ARGS
 	--project-name $(PROJECT_NAME)
 endef
 
-get_service_health = $$(docker inspect --format {{.State.Health.Status}} $(PROJECT_NAME)-$(1))
+get_service_health = $$(docker inspect --format {{.State.Health.Status}} $(1))
 
 wait_until_service_healthy = { \
 	echo "Waiting for $(1) to be healthy"; \
