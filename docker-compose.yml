@@ -1,0 +1,68 @@
+version: "3.5"
+services:
+
+  fuse-shared-mount:
+    build:
+      context: ./fuse-shared-mount
+    container_name: fuse-shared-mount
+    image: ${PROJECT_NAME}/fuse-shared-mount:latest
+    networks:
+      - plexflix
+    pid: host
+    privileged: true
+
+  plex:
+    container_name: plex
+    environment:
+      - PUID=${USER}
+      - PGID=${GROUP}
+      - VERSION=docker
+    image: linuxserver/plex:latest
+    networks:
+      - plexflix
+    ports:
+      - ${PLEX_DLNA_SERVER_TCP_PORT}:32469
+      - ${PLEX_DLNA_SERVER_UDP_PORT}:1900
+      - ${PLEX_MEDIA_SERVER_PORT}:32400
+      - ${PLEX_NETWORK_DISCOVERY_PORT_1}:32410
+      - ${PLEX_NETWORK_DISCOVERY_PORT_2}:32412
+      - ${PLEX_NETWORK_DISCOVERY_PORT_3}:32413
+      - ${PLEX_NETWORK_DISCOVERY_PORT_4}:32414
+      - ${PLEX_ROKU_COMPANION_PORT}:8324
+    restart: unless-stopped
+    volumes:
+      - ${PLEX_CONFIG_PATH}:/config:delegated
+      - ${LIBRARIES_MOUNT_PATH}:/libraries:shared
+
+  plexdrive:
+    build:
+      context: ./plexdrive
+    cap_add:
+      - MKNOD
+      - SYS_ADMIN
+    container_name: plexdrive
+    devices:
+      - /dev/fuse
+    environment:
+      - PUID=${USER}
+      - PGID=${GROUP}
+      - ROOT_FOLDER_ID=${PLEXDRIVE_ROOT_FOLDER_ID}
+    healthcheck:
+      test: "[ -f /data/.mountcheck ] && exit 0 || exit 1"
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+    image: ${PROJECT_NAME}/plexdrive:latest
+    networks:
+      - plexflix
+    restart: unless-stopped
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - ${PLEXDRIVE_CONFIG_PATH}:/config:delegated
+      - ${LIBRARIES_MOUNT_PATH}:/data:shared
+
+networks:
+  plexflix:
+    driver: bridge
+    name: plexflix

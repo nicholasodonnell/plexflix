@@ -1,28 +1,14 @@
 include .env
 
 SHELL := /bin/bash
-DOCKER_COMPOSE_HELPERS_FILE := docker-compose.helpers.yml
-DOCKER_COMPOSE_LETSENCRYPT_NGINX_PROXY_COMPANION_FILE := docker-compose.letsencrypt-nginx-proxy-companion.yml
-DOCKER_COMPOSE_NETWORKS_FILE := docker-compose.networks.yml
-DOCKER_COMPOSE_PLEX_FILE := ./plex/docker-compose.plex.yml
-DOCKER_COMPOSE_PLEXDRIVE_FILE := ./plexdrive/docker-compose.plexdrive.yml
 PROJECT_DIRECTORY := $(shell pwd)
 PROJECT_NAME := $(if $(PROJECT_NAME),$(PROJECT_NAME),plexflix)
 
 define DOCKER_COMPOSE_ARGS
-	--file ${DOCKER_COMPOSE_HELPERS_FILE} \
-	--file ${DOCKER_COMPOSE_NETWORKS_FILE} \
-	--file ${DOCKER_COMPOSE_PLEX_FILE} \
-	--file ${DOCKER_COMPOSE_PLEXDRIVE_FILE} \
 	--log-level ERROR \
 	--project-directory $(PROJECT_DIRECTORY) \
 	--project-name $(PROJECT_NAME)
 endef
-
-ifdef LETSENCRYPT_NGINX_PROXY_COMPANION_NETWORK
-	DOCKER_COMPOSE_ARGS := ${DOCKER_COMPOSE_ARGS} \
-		--file ${DOCKER_COMPOSE_LETSENCRYPT_NGINX_PROXY_COMPANION_FILE}
-endif
 
 get_service_health = $$(docker inspect --format {{.State.Health.Status}} $(PROJECT_NAME)-$(1))
 

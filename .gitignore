@@ -4,6 +4,7 @@ Thumbs.db
 
 # docker
 .env
+docker-compose.override.yml
 
 # config
 **/config/*

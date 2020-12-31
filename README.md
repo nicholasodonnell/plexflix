@@ -17,7 +17,7 @@
 ## Installation
 
 1. Install fuse on your system (optional).
-2. Create a `.env` file using [`.env.example`](.env.example) as a reference.
+2. Create a `.env` file using [`.env.example`](.env.example) as a reference: `cp -n .env{.example,}`.
 3. Build the Plexflix docker images by running `make build`.
 4. Create the Plexdrive configuration files by running `make plexdrive-setup` and following the prompts.
 5. Create a `.mountcheck` file on Google Drive. This file will tell Plexflix your mount is healthy.
@@ -93,7 +93,6 @@ make mount-health
 | `GROUP`                                     | `PGID` of user for volume mounts. Ensures any volume directories on the host are owned by the same user to avoid any permissions issues.                                                                                                  |
 | `TIMEZONE`                                  | Timezone to use.                                                                                                                                                                                                                          |
 | `LIBRARIES_MOUNT_PATH`                      | Path on the host to mount Google Drive libraries.                                                                                                                                                                                         |
-| `LETSENCRYPT_NGINX_PROXY_COMPANION_NETWORK` | _(Optional)_ Name of the external network for proxying Plex over SSL. See [nicholasodonnell/docker-letsencrypt-nginx-proxy-companion](https://github.com/nicholasodonnell/docker-letsencrypt-nginx-proxy-companion) for more information. |
 | `PLEX_COMPANION_PORT`                       | Host port for the Plex companion.                                                                                                                                                                                                         |
 | `PLEX_DLNA_SERVER_TCP_PORT`                 | Host port for Plex DLNA server (TCP).                                                                                                                                                                                                     |
 | `PLEX_DLNA_SERVER_UDP_PORT`                 | Host port for Plex DLNA server (UDP).                                                                                                                                                                                                     |
@@ -103,7 +102,6 @@ make mount-health
 | `PLEX_NETWORK_DISCOVERY_PORT_3`             | Host port for Plex network discovery (#3).                                                                                                                                                                                                |
 | `PLEX_NETWORK_DISCOVERY_PORT_4`             | Host port for Plex network discovery (#4).                                                                                                                                                                                                |
 | `PLEX_ROKU_COMPANION_PORT`                  | Host port for Plex Roku companion.                                                                                                                                                                                                        |
-| `PLEX_HOST`                                 | _(Optional)_ Virtual host to resolve Plex. See [nicholasodonnell/docker-letsencrypt-nginx-proxy-companion](https://github.com/nicholasodonnell/docker-letsencrypt-nginx-proxy-companion) for more information.                            |
 | `PLEXDRIVE_CONFIG_PATH`                     | Host location for Rclone configuration files.                                                                                                                                                                                             |
 | `PLEXDRIVE_ROOT_FOLDER_ID`                  | Google Drive folder ID to be treated as the root folder (use this to mount a sub directory).                                                                                                                                              |
 
