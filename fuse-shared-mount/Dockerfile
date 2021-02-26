@@ -1,7 +1,5 @@
-# base image
 FROM alpine:latest
 
-# declare MOUNT_DIR
 ENV MOUNT_DIR=/Users
 
 # https://github.com/docker/for-mac/issues/3431#issuecomment-545267759
