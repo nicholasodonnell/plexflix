@@ -112,6 +112,7 @@ ifndef service
 		up \
 			--detach \
 			--remove-orphans \
+			nginx \
 			plexdrive
 
 	@$(call wait_until_service_healthy,plexdrive)
