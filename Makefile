@@ -2,7 +2,7 @@ include .env
 
 SHELL := /bin/bash
 PROJECT_DIRECTORY := $(shell pwd)
-PROJECT_NAME := $(if $(PROJECT_NAME),$(PROJECT_NAME),plexflix)
+PROJECT_NAME := plexflix
 
 define DOCKER_COMPOSE_ARGS
 	--log-level ERROR \
@@ -26,21 +26,11 @@ wait_until_service_healthy = { \
 help: ## usage
 	@cat Makefile | grep -E '^[a-zA-Z_-]+:.*?## .*$$' | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-build: ## build plexflix images
-ifndef service
+build: ## build docker images
 	@docker-compose ${DOCKER_COMPOSE_ARGS} \
 		build \
 			--force-rm \
-			--pull;
-	@docker-compose ${DOCKER_COMPOSE_ARGS} \
-		pull \
-			--ignore-pull-failures;
-else
-	@docker-compose ${DOCKER_COMPOSE_ARGS} \
-		build \
-			--force-rm \
-			$(service)
-endif
+			--pull
 
 clean: ## remove plexflix images & containers
 	@docker-compose ${DOCKER_COMPOSE_ARGS} \
@@ -49,17 +39,11 @@ clean: ## remove plexflix images & containers
 			--rmi all \
 			--volumes
 
-down: ## bring plexflix down
+down: ## stop collection
 	@docker-compose ${DOCKER_COMPOSE_ARGS} \
 		down \
 			--remove-orphans \
 			--volumes
-
-exec: ## run a command against a running service
-	@docker-compose ${DOCKER_COMPOSE_ARGS} \
-		exec \
-			$(service) \
-				$(cmd)
 
 fuse-shared-mount: ## make shared fuse mount
 	@docker-compose ${DOCKER_COMPOSE_ARGS} \
@@ -92,22 +76,7 @@ plexdrive-setup: ## create plexdrive configuration files
 			plexdrive \
 				plexdrive_setup
 
-ps: ## lists running services
-	@docker ps \
-		--format {{.Names}}
-
-restart: ## restart a service
-	@docker-compose ${DOCKER_COMPOSE_ARGS} \
-	restart \
-		$(service)
-
-stop: ## stop a service
-	@docker-compose ${DOCKER_COMPOSE_ARGS} \
-	stop \
-		$(service)
-
-up: ## bring plexflix up
-ifndef service
+up: ## start collection
 	@docker-compose ${DOCKER_COMPOSE_ARGS} \
 		up \
 			--detach \
@@ -121,25 +90,14 @@ ifndef service
 			--detach \
 			--remove-orphans \
 			plex
-else
-	@docker-compose ${DOCKER_COMPOSE_ARGS} \
-		up \
-			--detach \
-			--remove-orphans \
-			$(service)
-endif
 
 .PHONY: \
 	help \
 	build \
 	clean \
 	down \
-	exec \
 	fuse-shared-mount \
 	logs \
 	mount-health \
 	plexdrive-setup \
-	ps \
-	restart \
-	stop \
 	up

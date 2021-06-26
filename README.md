@@ -30,28 +30,16 @@ When running the Plexflix for the first time, after doing a `make up`:
 
 ## Usage
 
-To bring up Plexflix:
+To start the collection:
 
 ```
 make up
 ```
 
-To bring down Plexflix:
+To stop the collection:
 
 ```
 make down
-```
-
-To restart a service:
-
-```
-make restart service="<service>"
-```
-
-To stop a service:
-
-```
-make stop service="<service>"
 ```
 
 To view logs:
@@ -60,22 +48,16 @@ To view logs:
 make logs [service="<service>"] [file=/path/to/log/file]
 ```
 
-To (re)build one or more services
+To build docker images:
 
 ```
-make build [service="<service>"]
+make build
 ```
 
-To clean the Plexflix project (will require another `make build`):
+To remove docker images:
 
 ```
 make clean
-```
-
-To list running services:
-
-```
-make ps
 ```
 
 To see the health of your Plexdrive mount:
@@ -88,7 +70,6 @@ make mount-health
 
 | Option                                      | Description                                                                                                                                                                                                                               |
 | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `PROJECT_NAME`                              | The docker compose project name.                                                                                                                                                                                                          |
 | `USER`                                      | `PUID` of user for volume mounts. Ensures any volume directories on the host are owned by the same user to avoid any permissions issues.                                                                                                  |
 | `GROUP`                                     | `PGID` of user for volume mounts. Ensures any volume directories on the host are owned by the same user to avoid any permissions issues.                                                                                                  |
 | `TIMEZONE`                                  | Timezone to use.                                                                                                                                                                                                                          |
