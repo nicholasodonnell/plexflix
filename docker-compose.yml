@@ -31,7 +31,6 @@ services:
       - ${PLEX_NETWORK_DISCOVERY_PORT_3}:32413
       - ${PLEX_NETWORK_DISCOVERY_PORT_4}:32414
       - ${PLEX_ROKU_COMPANION_PORT}:8324
-    restart: unless-stopped
     volumes:
       - ${PLEX_CONFIG_PATH}:/config:delegated
       - ${LIBRARIES_MOUNT_PATH}:/libraries:shared
@@ -57,7 +56,6 @@ services:
     image: plexflix/plexdrive:latest
     networks:
       - plexflix
-    restart: unless-stopped
     security_opt:
       - apparmor:unconfined
     volumes:
