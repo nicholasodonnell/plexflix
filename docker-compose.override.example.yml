@@ -1,0 +1,10 @@
+version: "3.5"
+services:
+
+  plex:
+    ports:
+      - ${PLEX_MEDIA_SERVER_PORT}:32400
+      - ${PLEX_NETWORK_DISCOVERY_PORT_1}:32410/udp
+      - ${PLEX_NETWORK_DISCOVERY_PORT_2}:32412/udp
+      - ${PLEX_NETWORK_DISCOVERY_PORT_3}:32413/udp
+      - ${PLEX_NETWORK_DISCOVERY_PORT_4}:32414/udp

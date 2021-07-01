@@ -5,6 +5,8 @@ services:
     build:
       context: ./fuse-shared-mount
     container_name: fuse-shared-mount
+    env_file:
+      - .env
     image: plexflix/fuse-shared-mount:latest
     networks:
       - plexflix
@@ -17,6 +19,8 @@ services:
     container_name: plex
     env_file:
       - .env
+    expose:
+      - 32400
     environment:
       - PUID=${USER}
       - PGID=${GROUP}
@@ -24,15 +28,6 @@ services:
     image: plexflix/plex:latest
     networks:
       - plexflix
-    ports:
-      - ${PLEX_DLNA_SERVER_TCP_PORT}:32469
-      - ${PLEX_DLNA_SERVER_UDP_PORT}:1900
-      - ${PLEX_MEDIA_SERVER_PORT}:32400
-      - ${PLEX_NETWORK_DISCOVERY_PORT_1}:32410
-      - ${PLEX_NETWORK_DISCOVERY_PORT_2}:32412
-      - ${PLEX_NETWORK_DISCOVERY_PORT_3}:32413
-      - ${PLEX_NETWORK_DISCOVERY_PORT_4}:32414
-      - ${PLEX_ROKU_COMPANION_PORT}:8324
     volumes:
       - ${PLEX_CONFIG_PATH}:/config:delegated
       - ${LIBRARIES_MOUNT_PATH}:/libraries:shared
