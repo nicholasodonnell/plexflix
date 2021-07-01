@@ -18,7 +18,7 @@
 
 1. Install fuse on your system (optional).
 2. Create a `.env` file using [`.env.example`](.env.example) as a reference: `cp -n .env{.example,}`.
-3. Create a `docker-compose.override.yml` file using [docker-compose.override.example.yml](docker-compose.override.example.yml) as a reference: `cp -n docker-compose.override{.example,}.yml`.
+3. Create a `docker-compose.override.yml` file using [`docker-compose.override.example.yml`](docker-compose.override.example.yml) as a reference: `cp -n docker-compose.override{.example,}.yml`.
 4. Build the Plexflix docker images by running `make build`.
 5. Create the Plexdrive configuration files by running `make plexdrive-setup` and following the prompts.
 6. Create a `.mountcheck` file on Google Drive. This file will tell Plexflix your mount is healthy.
@@ -71,7 +71,6 @@ make mount-health
 
 | Option                          | Description                                                                                                                              |
 | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `BIND_PORTS`                    | Bind exposed ports to the host? Setting to `false` is useful if this collection is sitting behind a reverse proxy.                       |
 | `USER`                          | `PUID` of user for volume mounts. Ensures any volume directories on the host are owned by the same user to avoid any permissions issues. |
 | `GROUP`                         | `PGID` of user for volume mounts. Ensures any volume directories on the host are owned by the same user to avoid any permissions issues. |
 | `TIMEZONE`                      | Timezone to use.                                                                                                                         |
