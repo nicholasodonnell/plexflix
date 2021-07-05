@@ -2,9 +2,24 @@ version: "3.5"
 services:
 
   plex:
+    environment:
+      - PUID=${USER}
+      - PGID=${GROUP}
     ports:
       - ${PLEX_MEDIA_SERVER_PORT}:32400
       - ${PLEX_NETWORK_DISCOVERY_PORT_1}:32410/udp
       - ${PLEX_NETWORK_DISCOVERY_PORT_2}:32412/udp
       - ${PLEX_NETWORK_DISCOVERY_PORT_3}:32413/udp
       - ${PLEX_NETWORK_DISCOVERY_PORT_4}:32414/udp
+    volumes:
+      - ${PLEX_CONFIG_PATH}:/config:delegated
+      - ${LIBRARIES_MOUNT_PATH}:/libraries:shared
+
+  plexdrive:
+    environment:
+      - PUID=${USER}
+      - PGID=${GROUP}
+      - ROOT_FOLDER_ID=${PLEXDRIVE_ROOT_FOLDER_ID}
+    volumes:
+      - ${PLEXDRIVE_CONFIG_PATH}:/config:delegated
+      - ${LIBRARIES_MOUNT_PATH}:/data:shared

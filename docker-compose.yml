@@ -22,15 +22,10 @@ services:
     expose:
       - 32400
     environment:
-      - PUID=${USER}
-      - PGID=${GROUP}
       - VERSION=docker
     image: plexflix/plex:latest
     networks:
       - plexflix
-    volumes:
-      - ${PLEX_CONFIG_PATH}:/config:delegated
-      - ${LIBRARIES_MOUNT_PATH}:/libraries:shared
 
   plexdrive:
     build:
@@ -43,10 +38,6 @@ services:
       - /dev/fuse
     env_file:
       - .env
-    environment:
-      - PUID=${USER}
-      - PGID=${GROUP}
-      - ROOT_FOLDER_ID=${PLEXDRIVE_ROOT_FOLDER_ID}
     healthcheck:
       test: "[ -f /data/.mountcheck ] && exit 0 || exit 1"
       interval: 10s
@@ -57,9 +48,6 @@ services:
       - plexflix
     security_opt:
       - apparmor:unconfined
-    volumes:
-      - ${PLEXDRIVE_CONFIG_PATH}:/config:delegated
-      - ${LIBRARIES_MOUNT_PATH}:/data:shared
 
 networks:
   plexflix:
